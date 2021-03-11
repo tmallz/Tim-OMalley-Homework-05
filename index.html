@@ -18,21 +18,103 @@
       href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="./Assets/CSS/style.css" />
     <title>Work Day Scheduler</title>
   </head>
 
   <body>
-    <header class="jumbotron">
+    <header class="jumbotron text-white bg-dark">
       <h1 class="display-3">Work Day Scheduler</h1>
       <p class="lead">A simple calendar app for scheduling your work day</p>
       <p id="currentDay" class="lead"></p>
     </header>
-    <div class="container">
-      <!-- Timeblocks go here -->
+    <div class="container" id = "calenderBlock">
+      <!-- Timeblocks go here - check if bootsrap has something for this (6am to 6pm) -->
+      <div class="container h-25" id = "nineTimeSlot">
+        <div class="row">
+          <div class="col-12" class = "calendarItem" id = "nineBlock">
+            <form>
+              <label>9 am:</label><input type="text" class = "calenderInput" id="nineam" name="fname"><input type="submit" id = "submitButton" data-button = "9am">
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="container h-25" id = "tenTimeSlot">
+        <div class="row">
+          <div class="col-12" class = "calendarItem" id = "tenBlock">
+            <form>
+              <label>10 am:</label><input type="text" class = "calenderInput" id="tenam" name="fname"><input type="submit" id = "submitButton" data-button = "10am">
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="container h-25" id = "elevenTimeSlot">
+        <div class="row">
+          <div class="col-12" class = "calendarItem" id = "elevenBlock">
+            <form>
+              <label>11 am:</label><input type="text" class = "calenderInput" id="elevenam" name="fname"><input type="submit" id = "submitButton" data-button = "11am">
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="container h-25" id = "noonTimeSlot">
+        <div class="row">
+          <div class="col-12" class = "calendarItem" id = "noonBlock">
+            <form>
+              <label>12 pm:</label><input type="text" class = "calenderInput" id="twelvepm" name="fname"><input type="submit" id = "submitButton" data-button = "12pm">
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="container h-25" id = "oneTimeSlot">
+        <div class="row">
+          <div class="col-12" class = "calendarItem" id = "oneBlock">
+            <form>
+              <label>1 pm:</label><input type="text" class = "calenderInput" id="onepm" name="fname"><input type="submit" id = "submitButton" data-button = "1pm">
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="container h-25" id = "twoTimeSlot">
+        <div class="row">
+          <div class="col-12" class = "calendarItem" id = "twoBlock">
+            <form>
+              <label>2 pm:</label><input type="text" class = "calenderInput" id="twopm" name="fname"><input type="submit" id = "submitButton" data-button = "2pm">
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="container h-25" id = "threeTimeSlot">
+        <div class="row">
+          <div class="col-12" class = "calendarItem" id = "threeBlock">
+            <form>
+              <label>3 pm:</label><input type="text" class = "calenderInput" id="threepm" name="fname"><input type="submit" id = "submitButton" data-button = "3pm">
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="container h-25" id = "fourTimeSlot">
+        <div class="row">
+          <div class="col-12" class = "calendarItem" id = "fourBlock">
+            <form>
+              <label>4 pm:</label><input type="text" class = "calenderInput" id="fourpm" name="fname"><input type="submit" id = "submitButton" data-button = "4pm">
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="container h-25" id = "fiveTimeSlot">
+        <div class="row">
+          <div class="col-12" class = "calendarItem" id = "fiveBlock">
+            <form>
+              <label>5 pm:</label><input type="text" class = "calenderInput" id="fivepm" name="fname"><input type="submit" id = "submitButton" data-button = "5pm">
+            </form>
+          </div>
+        </div>
+      </div>
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+    <script src="./Assets/javascript/script.js"></script>
   </body>
 </html>
