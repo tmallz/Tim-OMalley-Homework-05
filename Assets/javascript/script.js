@@ -8,97 +8,57 @@
 
 //function get local storage items and display them in proper timeblocks (called in init())
 
-//init ()
-    //loads items from local storage
-    //diplays them on page
+
+
+
+$(document).ready(function() {
+
+    document.querySelector('#currentDay').textContent = moment().format('MMM DD, YYYY');
     
-//
+    var timeSlots = $('#time-block');
+    var timeArray = ['9 am', '10 am', '11 am', '12 pm', '1 pm', '2 pm', '3 pm', '4 pm', '5 pm']
 
-var dayDisplayEl = document.querySelector('#currentDay');
-var currentDay = moment().format('MMM DD, YYYY');
-var calenderInputEl = document.querySelector('.calenderInput');
-var submitListenerEl = document.querySelector('#calenderBlock');
-var activityStorage;
-var test = "test";
-localStorage.setItem("activity", test);
+    function buildTimeBlocks(){
+        timeArray.forEach(function (i) {
+            var userVals = localStorage.getItem(i);
+            var rowEl = $("<div>").addClass("row");
 
-function timeCheck(){
-    var currentTime = moment();
-    console.log(currentTime);
-    if(currentTime.isBetween(9,10, 'HH')){
-        console.log(currentTime);
-        var nineEl = document.querySelector('#nineam');
-        var nineBlockEl = document.querySelector('#nineBlock');
-        nineEl.style.backgroundColor = 'red';
-        nineBlockEl.style.backgroundColor = 'red';  
-     }else if(currentTime.isBetween(10,11, 'HH')){
-        var tenEl = document.querySelector('#tenam');
-        var tenBlockEl = document.querySelector('#tenBlock');
-        tenEl.style.backgroundColor = 'red';
-        tenBlockEl.style.backgroundColor = 'red';  
-    }else if(currentTime.isBetween(11,12, 'HH')){
-        var elevenEl = document.querySelector('#elevenam');
-        var elevenBlockEl = document.querySelector('#elevenBlock');
-        elevenEl.style.backgroundColor = 'red';
-        elevenBlockEl.style.backgroundColor = 'red';  
+            let timeEl = $("<label>").addClass("hour col-12 col-lg-2").val(i).text(i).attr("type", "label");
+            let calInput = $("<input>").addClass("col-12 col-lg-8").attr("type", "text").val(userVals);
+            let button = $("<button>").addClass("saveBtn col-12 col-lg-2").text("save").attr("type", "button");
+
+            button.click(function (i) {
+                let userInput = calInput.val();
+                let curTime = timeEl.val();
+                localStorage.setItem(curTime, userInput);
+                calInput.text(userInput);
+            })
+
+            rowEl.append(timeEl).append(calInput).append(button);
+            timeSlots.append(rowEl);
+            colorChanger(timeEl, calInput);
+        })
     }
-}
 
+    function colorChanger(timeEl, calInput) {
 
-function displayTime(){
-    dayDisplayEl.textContent = currentDay;
-}
-
-function getLocalStorageItems(){
-    activityStorage = localStorage.getItem("activity");
-}
-
-function displayItems(){
-    calenderInputEl.textContent = activityStorage;
-}
-
-function init() {
-    displayTime();
-    getLocalStorageItems();
-    displayItems();
-    timeCheck();
-}
-
-init();
-setInterval(timeCheck, 60000);
-
-submitListenerEl.addEventListener('submit', function(event){
-    event.preventDefault();
-
-    var timeSlotSubmitted = event.target.getAttribute('data-button');
-    var inputData;
-    if(timeSlotSubmitted === '9am'){
-        inputData = document.getElementById('#nineam');
-        localStorage.setItem('activity9', timeSlotSubmitted);
-    }else if(timeSlotSubmitted === '10am'){
-        inputData = document.querySelector('#tenam');
-        localStorage.setItem('activity10', timeSlotSubmitted);
-    }else if(timeSlotSubmitted === '11am'){
-        inputData = document.querySelector('#elevenam');
-        localStorage.setItem('activity11', timeSlotSubmitted);
-    }else if(timeSlotSubmitted === '12pm'){
-        inputData = document.querySelector('#twelvepm');
-        localStorage.setItem('activity12', timeSlotSubmitted);
-    }else if(timeSlotSubmitted === '1pm'){
-        inputData = document.querySelector('#onepm');
-        localStorage.setItem('activity1', timeSlotSubmitted);
-    }else if(timeSlotSubmitted === '2pm'){
-        inputData = document.querySelector('#twopm');
-        localStorage.setItem('activity2', timeSlotSubmitted);
-    }else if(timeSlotSubmitted === '3pm'){
-        inputData = document.querySelector('#threeam');
-        localStorage.setItem('activity3', timeSlotSubmitted);
-    }else if(timeSlotSubmitted === '4pm'){
-        inputData = document.querySelector('#fouram');
-        localStorage.setItem('activity4', timeSlotSubmitted);;
-    }else if(timeSlotSubmitted === '5pm'){
-        inputData = document.querySelector('#fivepm');
-        localStorage.setItem('activity5', timeSlotSubmitted);
+        let currentTime = moment().hours();
+        let calTime = parseInt(timeEl.val().split(" ")[0]);
+        
+        if (calTime < 6) {
+            calTime = calTime + 12;
+        }
+        
+        if (calTime < currentTime) {
+            calInput.addClass("past");
+        }
+        else if (calTime === currentTime) {
+            calInput.addClass("present");
+        }
+        else {
+            calInput.addClass("future");
+        }
     }
-    
+
+    buildTimeBlocks();
 })
